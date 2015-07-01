@@ -22,3 +22,7 @@ sudo chmod -v 0400 ca-key.pem key.pem server-key.pem
 sudo chmod -v 0444 ca.pem server-cert.pem cert.pem
 sudo mkdir -pv ~/.docker
 sudo cp -v {ca,cert,key}.pem ~/.docker
+
+echo "Please, make sure you set the following environment variables:"
+echo "    * DOCKER_HOST=tcp://yourserverdomain:2376" 
+echo "    * DOCKER_TLS_VERIFY=1"
