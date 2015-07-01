@@ -11,8 +11,8 @@ openssl genrsa -out key.pem 2048
 openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 echo extendedKeyUsage = clientAuth > extfile.cnf
 openssl x509 -req -days 365 -in client.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out cert.pem -extfile extfile.cnf
-rm -v client.csr server.csr
-chmod -v 0400 ca-key.pem key.pem server-key.pem
-chmod -v 0444 ca.pem server-cert.pem cert.pem
-mkdir -pv ~/.docker
-cp -v {ca,cert,key}.pem ~/.docker
+sudo rm -v client.csr server.csr
+sudo chmod -v 0400 ca-key.pem key.pem server-key.pem
+sudo chmod -v 0444 ca.pem server-cert.pem cert.pem
+sudo mkdir -pv ~/.docker
+sudo cp -v {ca,cert,key}.pem ~/.docker
