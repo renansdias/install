@@ -1,6 +1,19 @@
 #!/bin/bash
 
+if [ "$USER" != "root" ]; then
+	echo "You must be running this script with the root user."
+	echo "Please, type in sudo -i before continuing."
+	exit 1;
+fi
+
 set -xe
+
+echo "Installing docker-compose..."
 
 curl -L https://github.com/docker/compose/releases/download/1.3.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
+echo "Creating /certs directory and creating self-signed certificate..."
+
+mkdir /certs
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -x509 -days 365 -out /certs/domain.crt
