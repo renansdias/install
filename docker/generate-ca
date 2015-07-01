@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $# -ne 1 ]; then
+	echo "Please, provide your server's FQDN as an argument";
+	exit 1;
+fi 
+
+set -ex
 
 openssl genrsa -aes256 -out ca-key.pem 2048
 openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
